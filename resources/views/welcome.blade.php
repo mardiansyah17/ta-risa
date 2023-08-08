@@ -15,12 +15,10 @@
 </head>
 
 <body class="antialiased">
-    @include('components.navbar')
-    <div class="">
-
-        @yield('content')
-    </div>
-
+{{--@include('components.navbar')--}}
+<div class="">
+    @yield('content')
+</div>
 
 
 </body>
