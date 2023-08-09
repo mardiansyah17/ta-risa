@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\PemesananExport;
 use App\Models\Pemesanan;
+use App\Models\Venue;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class PemesananController extends Controller
 {
@@ -69,11 +72,55 @@ class PemesananController extends Controller
         ]);
     }
 
-    public function admin()
+    public function admin(Request $request)
     {
+        $query = Pemesanan::with(['user', 'venue', 'sesi']);
+
+        $startDate = $request->input('start_date');
+        $endDate = $request->input('end_date');
+        $venue = $request->input('venue');
+
+        if ($startDate && $endDate) {
+
+            $query->whereBetween('created_at', [$startDate, $endDate]);
+        }
+
+        if ($venue) {
+            $query->orWhere('venue_id', $venue);
+        }
+
+        $pesanans = $query->get();
+        $venues = Venue::all();
+
         return view('admin.index', [
-            'pesanans' => Pemesanan::with(['user', 'venue', 'sesi'])->get(),
+            'pesanans' => $pesanans,
+            'venues' => $venues,
         ]);
+    }
+
+    public function download(Request $request)
+    {
+        $query = Pemesanan::with(['user', 'venue', 'sesi']);
+
+        $startDate = $request->input('start_date');
+        $endDate = $request->input('end_date');
+        $venue = $request->input('venue');
+
+        if ($startDate && $endDate) {
+
+            $query->whereBetween('created_at', [$startDate, $endDate]);
+        }
+
+        if ($venue) {
+
+
+            $query->orWhere('venue_id', $venue);
+        }
+        $pesanans = $query->get();
+        new PemesananExport($pesanans);
+
+        return Excel::download(new PemesananExport($pesanans), 'pesanan.xlsx');
+//        return Excel::download($pesanans, 'pesanan.xlsx');
     }
 
     /**

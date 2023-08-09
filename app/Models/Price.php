@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Price extends Model
 {
     use HasFactory;
-
+protected $guarded = ['id'];
     public function venue()
     {
         return $this->belongsTo(Venue::class);

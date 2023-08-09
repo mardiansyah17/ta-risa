@@ -6,7 +6,7 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}">
+                    <a href="/">
                         <img src="{{ asset('images/logo-jakabaring.png') }}" class="h-14" alt="">
 
                     </a>
@@ -43,9 +43,21 @@
                                 {{ __('Profile') }}
                             </x-dropdown-link>
 
-                            <x-dropdown-link :href="route('profile.edit')">
-                                {{ __('Pesanan saya') }}
-                            </x-dropdown-link>
+                            @if(auth()->user()->role == "admin")
+
+                                <x-dropdown-link :href="route('admin.index')">
+                                    {{ __('Laporan') }}
+                                </x-dropdown-link>
+
+                                <x-dropdown-link :href="route('venue.kelola-venue')">
+                                    {{ __('Kelola venue') }}
+                                </x-dropdown-link>
+
+                            @else
+                                <x-dropdown-link :href="route('pesanan.index')">
+                                    {{ __('Pesanan saya') }}
+                                </x-dropdown-link>
+                            @endif
 
                             <!-- Authentication -->
                             <form method="POST" action="{{ route('logout') }}">

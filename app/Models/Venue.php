@@ -9,6 +9,7 @@ class Venue extends Model
 {
     use HasFactory;
 
+    protected $guarded = ['id'];
     public function prices()
     {
         return $this->hasMany(Price::class);

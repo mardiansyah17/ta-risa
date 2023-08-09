@@ -19,7 +19,7 @@ return new class extends Migration {
             $table->foreignId('venue_id')->constrained('venues');
             $table->foreignId('sesi_id')->constrained('sesis');
             $table->enum('status', ["belum bayar", "sudah bayar", "selesai", "batal"])->default("belum bayar");
-            $table->string('kode_transaksi')->unique();
+            $table->string('kode_transaksi')->nullable();
             $table->string('bukti_pembayaran')->nullable();
         });
     }

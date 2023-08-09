@@ -4,7 +4,7 @@
         <h2 class="card-title">{{ $title }}</h2>
         <p>{{ $desc }}</p>
         <div class="card-actions justify-end">
-            <a href="{{route('venues.detail',$id)}}" class="btn btn-primary">Pesan sekarang</a>
+            <a href="{{route('venue.show',$id)}}" class="btn btn-primary">Pesan sekarang</a>
         </div>
     </div>
 </div>
