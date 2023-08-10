@@ -4,8 +4,7 @@
         <div class="max-w-md">
             <h1 class="mb-5 text-5xl font-bold">JAKABARING SPORT CITY
             </h1>
-            <p class="mb-5">Tempa pemesanan lapangan</p>
-            <button class="btn btn-primary">Pesan sekarng</button>
+            <p class="mb-5">Tempat pemesanan lapangan</p>
         </div>
     </div>
 </div>

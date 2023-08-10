@@ -42,23 +42,25 @@ Route::post('/sesi/{price}/tambah-sesi', [VenueController::class, 'storeSesi'])-
 Route::post('/harga/{venue}/tambah', [VenueController::class, 'tambahHarga'])->name('harga.tambah');
 
 
+Route::get('venue/{venue}', [VenueController::class, 'show'])->name('venue.show');
+Route::get('venues/{venue}/pesan', [VenueController::class, 'showPesan'])->name('venues.showPesan');
+
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::resource('venue', VenueController::class);
+    Route::resource('venue', VenueController::class)->except(['show']);
     Route::resource('transaksi', TransaksiController::class);
     Route::get('pesanlapangan', function () {
         return view('pesanlapangan.pesanlapngan');
     });
 
 
-    Route::get('venues/{venue}/pesan', [VenueController::class, 'showPesan'])->name('venues.showPesan');
     Route::post('venues/{venue}/pesan', [VenueController::class, 'pesan'])->name('venues.pesan');
     Route::resource('pesanan', PemesananController::class);
     Route::post("pesanan/{pesanan}/bayar", [PemesananController::class, 'bayar'])->name('pesanan.bayar');
-
 });
 
 require __DIR__ . '/auth.php';

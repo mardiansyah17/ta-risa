@@ -43,7 +43,7 @@ class VenueController extends Controller
     public function harga(Venue $venue)
     {
         $prices = Price::with("sesi")->where("venue_id", $venue->id)->get();
-//        dd($sesi);
+        //        dd($sesi);
         return view("venue.harga", [
             "venue" => $venue,
             "prices" => $prices
@@ -162,13 +162,12 @@ class VenueController extends Controller
         $venue->update([
             "title" => $request->title,
             "description" => $request->description,
-//            "image" => $image,
+            //            "image" => $image,
             "type" => $request->type,
             "kapasistas" => $request->kapasistas,
             "nohp" => $request->nohp,
         ]);
         return redirect()->route('venue.kelola-venue')->with('success', 'Venue Berhasil Ditambahkan');
-
     }
 
     /**
@@ -181,12 +180,11 @@ class VenueController extends Controller
     {
         $venue->delete();
         return redirect()->route('venue.kelola-venue')->with('success', 'Venue Berhasil Ditambahkan');
-
     }
 
     public function tambahSesi(Price $price)
     {
-        return view('venue.kelolasesi', [
+        return view('venue.tambahHarga', [
             'price' => $price
         ]);
     }
@@ -210,6 +208,10 @@ class VenueController extends Controller
 
     public function tambahHarga(Venue $venue, Request $request)
     {
+        $request->validate([
+            'price' => 'required'
+        ]);
+
         $venue->prices()->create([
             "price" => $request->price,
         ]);
