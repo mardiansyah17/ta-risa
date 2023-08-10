@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -34,11 +35,12 @@ class ProfileController extends Controller
             'ktp' => 'required|file|mimes:jpg,jpeg,png',
 
         ]);
+        $user['ktp'] = $request->file('ktp')->store('ktp');
         $user['is_completed'] = true;
-        Auth::user()->update($user);
-//        if ($request->user()->isDirty('email')) {
-//            $request->user()->email_verified_at = null;
-//        }
+        User::find(Auth()->user()->id)->update($user);
+        //        if ($request->user()->isDirty('email')) {
+        //            $request->user()->email_verified_at = null;
+        //        }
 
 
         return Redirect::route('profile.edit')->with('status', 'profile-updated');

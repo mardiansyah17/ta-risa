@@ -37,21 +37,28 @@ Route::get('/venue/harga/{venue}', [VenueController::class, 'harga'])->name('ven
 Route::get("/admin", [PemesananController::class, 'admin'])->name('admin.index');
 Route::get("/admin/download-laporan", [PemesananController::class, 'download'])->name('admin.download-laporan');
 
-Route::get('/sesi/{price}/tambah-sesi', [VenueController::class, 'tambahSesi'])->name('sesi.tambah-sesi');
-Route::post('/sesi/{price}/tambah-sesi', [VenueController::class, 'storeSesi'])->name('sesi.store-sesi');
-Route::post('/harga/{venue}/tambah', [VenueController::class, 'tambahHarga'])->name('harga.tambah');
-
-
-Route::get('venue/{venue}', [VenueController::class, 'show'])->name('venue.show');
-Route::get('venues/{venue}/pesan', [VenueController::class, 'showPesan'])->name('venues.showPesan');
 
 
 Route::middleware('auth')->group(function () {
+    Route::middleware('admin')->group(function () {
+        Route::get('/venue/create', [VenueController::class, 'create'])->name('venue.create');
+        Route::post('/venue', [VenueController::class, 'store'])->name('venue.store');
+    });
+
+
+    Route::get('/sesi/{price}/tambah-sesi', [VenueController::class, 'tambahSesi'])->name('sesi.tambah-sesi');
+    Route::post('/sesi/{price}/tambah-sesi', [VenueController::class, 'storeSesi'])->name('sesi.store-sesi');
+    Route::post('/harga/{venue}/tambah', [VenueController::class, 'tambahHarga'])->name('harga.tambah');
+
+
+    Route::get('venue/{venue}', [VenueController::class, 'show'])->name('venue.show');
+    Route::get('venues/{venue}/pesan', [VenueController::class, 'showPesan'])->name('venues.showPesan');
+
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::resource('venue', VenueController::class)->except(['show']);
+    Route::resource('venue', VenueController::class)->except(['show', 'create', 'store']);
     Route::resource('transaksi', TransaksiController::class);
     Route::get('pesanlapangan', function () {
         return view('pesanlapangan.pesanlapngan');

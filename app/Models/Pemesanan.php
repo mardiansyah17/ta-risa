@@ -34,9 +34,8 @@ class Pemesanan extends Model
         $year = now()->format('Y');
         $month = now()->format('m');
         $lastTransaction = self::latest()->first();
-        dd($lastTransaction);
         if ($lastTransaction) {
-            $lastCode = $lastTransaction->code;
+            $lastCode = $lastTransaction->kode_transaksi;
             $lastIncrement = intval(substr($lastCode, -3));
             $newIncrement = str_pad($lastIncrement + 1, 3, '0', STR_PAD_LEFT);
         } else {
