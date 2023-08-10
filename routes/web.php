@@ -37,7 +37,7 @@ Route::get('/venue/harga/{venue}', [VenueController::class, 'harga'])->name('ven
 Route::get("/admin", [PemesananController::class, 'admin'])->name('admin.index');
 Route::get("/admin/download-laporan", [PemesananController::class, 'download'])->name('admin.download-laporan');
 
-
+Route::get('venue/{venue}', [VenueController::class, 'show'])->name('venue.show');
 
 Route::middleware('auth')->group(function () {
     Route::middleware('admin')->group(function () {
@@ -51,7 +51,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/harga/{venue}/tambah', [VenueController::class, 'tambahHarga'])->name('harga.tambah');
 
 
-    Route::get('venue/{venue}', [VenueController::class, 'show'])->name('venue.show');
+    
     Route::get('venues/{venue}/pesan', [VenueController::class, 'showPesan'])->name('venues.showPesan');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
