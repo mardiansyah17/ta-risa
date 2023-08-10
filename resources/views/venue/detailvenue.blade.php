@@ -1,6 +1,7 @@
 <x-app-layout>
     <div class="p-3">
-        <img src="{{ asset('/images/jakabaring.jpg') }}" class="h-[20rem] bg-cover  w-4/5 mx-auto rounded-md">
+        <img src="{{ asset('/images/jakabaring.jpg') }}"
+            class="h-[20rem] bg-cover  object-cover  w-4/5 mx-auto rounded-md">
         <div class="flex mt-5 space-x-3">
             <div class="basis-[70%]">
 
