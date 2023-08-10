@@ -11,7 +11,7 @@ class Pemesanan extends Model
 
     protected $guarded = ["id"];
 
-//    protected $table = "pemesanans";
+    //    protected $table = "pemesanans";
 
     public function user()
     {
@@ -30,22 +30,19 @@ class Pemesanan extends Model
 
     public static function generateTransactionCode()
     {
-        $year = date('Y');
-        $month = date('m');
-
-        $lastRecord = self::latest()->first();
-        if ($lastRecord) {
-            $lastCode = $lastRecord->id;
-            $lastYear = substr($lastCode, 4, 4);
-            $lastMonth = substr($lastCode, 9, 2);
-
-            $increment = $lastCode += 1;
+        $prefix = 'SI/JSC/';
+        $year = now()->format('Y');
+        $month = now()->format('m');
+        $lastTransaction = self::latest()->first();
+        dd($lastTransaction);
+        if ($lastTransaction) {
+            $lastCode = $lastTransaction->code;
+            $lastIncrement = intval(substr($lastCode, -3));
+            $newIncrement = str_pad($lastIncrement + 1, 3, '0', STR_PAD_LEFT);
         } else {
-            $increment = 1;
+            $newIncrement = '001';
         }
 
-        $incrementFormatted = str_pad($increment, 4, '0', STR_PAD_LEFT);
-
-        return "SI/JSC/{$year}/{$month}/{$incrementFormatted}";
+        return $prefix . $year . '/' . $month . '/' . $newIncrement;
     }
 }

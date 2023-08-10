@@ -1,4 +1,14 @@
 <section>
+    @if (session('message'))
+        <div class="alert alert-warning">
+            <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none"
+                viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+            </svg>
+            <span>{{ session('message') }}</span>
+        </div>
+    @endif
     <header>
         <h2 class="text-lg font-medium text-gray-900">
             {{ __('Profile Information') }}
@@ -18,47 +28,47 @@
         @method('patch')
 
         <div>
-            <x-input-label for="name" :value="__('Name')"/>
+            <x-input-label for="name" :value="__('Name')" />
             <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name', $user->name)"
-                          required autofocus autocomplete="name"/>
-            <x-input-error class="mt-2" :messages="$errors->get('name')"/>
+                required autofocus autocomplete="name" />
+            <x-input-error class="mt-2" :messages="$errors->get('name')" />
         </div>
 
         <div>
-            <x-input-label for="nik" :value="__('NIK')"/>
+            <x-input-label for="nik" :value="__('NIK')" />
             <x-text-input id="nik" name="nik" type="text" class="mt-1 block w-full" :value="old('nik', $user->nik)"
-                          required autofocus autocomplete="nik"/>
-            <x-input-error class="mt-2" :messages="$errors->get('nik')"/>
+                required autofocus autocomplete="nik" />
+            <x-input-error class="mt-2" :messages="$errors->get('nik')" />
         </div>
 
         <div>
-            <x-input-label for="phone" :value="__('Nomor hp')"/>
-            <x-text-input id="phone" name="phone" type="text" class="mt-1 block w-full"
-                          :value="old('phone', $user->phone)"
-                          required autofocus autocomplete="phone"/>
-            <x-input-error class="mt-2" :messages="$errors->get('phone')"/>
+            <x-input-label for="phone" :value="__('Nomor hp')" />
+            <x-text-input id="phone" name="phone" type="text" class="mt-1 block w-full" :value="old('phone', $user->phone)"
+                required autofocus autocomplete="phone" />
+            <x-input-error class="mt-2" :messages="$errors->get('phone')" />
         </div>
 
         <div>
-            <input type="file" class="file-input file-input-bordered file-input-primary w-full max-w-xs" name="ktp"/>
-            <x-input-error class="mt-2" :messages="$errors->get('ktp')"/>
+            <input type="file" class="file-input file-input-bordered file-input-primary w-full max-w-xs"
+                name="ktp" />
+            <x-input-error class="mt-2" :messages="$errors->get('ktp')" />
 
         </div>
 
 
         <div>
-            <x-input-label for="email" :value="__('Email')"/>
-            <x-text-input id="email" name="email" type="email" class="mt-1 block w-full"
-                          :value="old('email', $user->email)" required autocomplete="username"/>
-            <x-input-error class="mt-2" :messages="$errors->get('email')"/>
+            <x-input-label for="email" :value="__('Email')" />
+            <x-text-input id="email" name="email" type="email" class="mt-1 block w-full" :value="old('email', $user->email)"
+                required autocomplete="username" />
+            <x-input-error class="mt-2" :messages="$errors->get('email')" />
 
-            @if ($user instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && ! $user->hasVerifiedEmail())
+            @if ($user instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && !$user->hasVerifiedEmail())
                 <div>
                     <p class="text-sm mt-2 text-gray-800">
                         {{ __('Your email address is unverified.') }}
 
                         <button form="send-verification"
-                                class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                            class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                             {{ __('Click here to re-send the verification email.') }}
                         </button>
                     </p>
@@ -76,13 +86,8 @@
             <x-primary-button>{{ __('Save') }}</x-primary-button>
 
             @if (session('status') === 'profile-updated')
-                <p
-                    x-data="{ show: true }"
-                    x-show="show"
-                    x-transition
-                    x-init="setTimeout(() => show = false, 2000)"
-                    class="text-sm text-gray-600"
-                >{{ __('Saved.') }}</p>
+                <p x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 2000)"
+                    class="text-sm text-gray-600">{{ __('Saved.') }}</p>
             @endif
         </div>
     </form>

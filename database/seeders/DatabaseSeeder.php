@@ -22,8 +22,8 @@ class DatabaseSeeder extends Seeder
 
         User::create([
             'id' => 1,
-            'name' => 'Test User',
-            "email" => "email@gmail.com",
+            'name' => 'Risa cantik',
+            "email" => "risa@gmail.com",
             'phone' => '08123456789',
             'password' => bcrypt('password'),
         ]);
@@ -31,6 +31,7 @@ class DatabaseSeeder extends Seeder
             'id' => 2,
             'name' => 'admin',
             "email" => "admin@gmail.com",
+            'role' => 'admin',
             'phone' => '08123456789',
             'password' => bcrypt('password'),
         ]);
@@ -141,6 +142,5 @@ class DatabaseSeeder extends Seeder
             "status" => 'belum bayar',
             "kode_transaksi" => Pemesanan::generateTransactionCode()
         ]);
-
     }
 }

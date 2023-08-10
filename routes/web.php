@@ -58,7 +58,7 @@ Route::middleware('auth')->group(function () {
     });
 
 
-    Route::post('venues/{venue}/pesan', [VenueController::class, 'pesan'])->name('venues.pesan');
+    Route::post('venues/{venue}/pesan', [VenueController::class, 'pesan'])->name('venues.pesan')->middleware('is_completed');
     Route::resource('pesanan', PemesananController::class);
     Route::post("pesanan/{pesanan}/bayar", [PemesananController::class, 'bayar'])->name('pesanan.bayar');
 });

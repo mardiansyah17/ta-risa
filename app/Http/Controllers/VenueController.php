@@ -8,6 +8,7 @@ use App\Models\Sesi;
 use App\Models\Venue;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class VenueController extends Controller
 {
@@ -53,10 +54,12 @@ class VenueController extends Controller
     public function pesan(Request $request, Venue $venue)
     {
 
-        $request->validate([
+        $validator = Validator::make($request->all(), [
             'sesi' => 'required',
         ]);
-
+        if ($validator->fails()) {
+            return redirect()->back()->with('error', 'Pastikan anda sudah memilih sesi');
+        }
 
         Pemesanan::create([
             "user_id" => Auth::user()->id,
