@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\PemesananController;
+use App\Http\Controllers\PriceController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SesiController;
 use App\Http\Controllers\TransaksiController;
 use App\Http\Controllers\VenueController;
 use App\Models\Venue;
@@ -34,14 +36,21 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 
-Route::get('/venue/kelola-venue', [VenueController::class, 'kelolaVenue'])->name('venue.kelola-venue');
-Route::get('/venue/harga/{venue}', [VenueController::class, 'harga'])->name('venue.harga');
-Route::get("/admin", [PemesananController::class, 'admin'])->name('admin.index');
-Route::get("/admin/download-laporan", [PemesananController::class, 'download'])->name('admin.download-laporan');
 
 
 Route::middleware('auth')->group(function () {
     Route::middleware('admin')->group(function () {
+        Route::get('/sesi/{price}/tambah-sesi', [VenueController::class, 'tambahSesi'])->name('sesi.tambah-sesi');
+        Route::post('/sesi/{price}/tambah-sesi', [VenueController::class, 'storeSesi'])->name('sesi.store-sesi');
+        Route::post('/harga/{venue}/tambah', [VenueController::class, 'tambahHarga'])->name('harga.tambah');
+        Route::get('/venue/kelola-venue', [VenueController::class, 'kelolaVenue'])->name('venue.kelola-venue');
+        Route::get('/venue/harga/{venue}', [VenueController::class, 'harga'])->name('venue.harga');
+        Route::get("/admin", [PemesananController::class, 'admin'])->name('admin.index');
+        Route::get("/admin/download-laporan", [PemesananController::class, 'download'])->name('admin.download-laporan');
+
+        Route::delete('/harga/{price}', [PriceController::class, 'destroy'])->name('price.destroy');
+        Route::delete('/sesi/{sesi}', [SesiController::class, 'destroy'])->name('sesi.destroy');
+
 
         Route::get('/venue/create', [VenueController::class, 'create'])->name('venue.create');
         Route::post('/venue', [VenueController::class, 'store'])->name('venue.store');
@@ -49,10 +58,6 @@ Route::middleware('auth')->group(function () {
         Route::put('/venue/{venue}', [VenueController::class, 'update'])->name('venue.update');
     });
 
-
-    Route::get('/sesi/{price}/tambah-sesi', [VenueController::class, 'tambahSesi'])->name('sesi.tambah-sesi');
-    Route::post('/sesi/{price}/tambah-sesi', [VenueController::class, 'storeSesi'])->name('sesi.store-sesi');
-    Route::post('/harga/{venue}/tambah', [VenueController::class, 'tambahHarga'])->name('harga.tambah');
 
 
 

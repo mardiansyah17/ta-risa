@@ -60,6 +60,9 @@ class VenueController extends Controller
         if ($validator->fails()) {
             return redirect()->back()->with('error', 'Pastikan anda sudah memilih sesi');
         }
+        if (Sesi::find($request->sesi)->status != "tersedia") {
+            return redirect()->back()->with('error', 'Sesi sudah di pesan');
+        }
 
         Pemesanan::create([
             "user_id" => Auth::user()->id,
@@ -214,7 +217,10 @@ class VenueController extends Controller
         $request->validate([
             'price' => 'required'
         ]);
-
+        $checkHarga = $venue->prices()->where("price", $request->price)->get()->count();
+        if ($checkHarga > 0) {
+            return redirect()->back()->with("message", "Harga sudah ada");
+        }
         $venue->prices()->create([
             "price" => $request->price,
         ]);

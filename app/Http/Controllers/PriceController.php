@@ -80,6 +80,7 @@ class PriceController extends Controller
      */
     public function destroy(Price $price)
     {
-        //
+        $price->delete();
+        return redirect()->back();
     }
 }

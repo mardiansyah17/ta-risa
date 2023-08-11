@@ -80,6 +80,7 @@ class SesiController extends Controller
      */
     public function destroy(Sesi $sesi)
     {
-        //
+        $sesi->delete();
+        return redirect()->back();
     }
 }
