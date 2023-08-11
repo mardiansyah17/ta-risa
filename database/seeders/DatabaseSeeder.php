@@ -126,21 +126,5 @@ class DatabaseSeeder extends Seeder
             "tanggal" => "2023-08-011",
             'price_id' => 4,
         ]);
-
-        Pemesanan::create([
-            'user_id' => 1,
-            "venue_id" => 1,
-            "sesi_id" => 1,
-            "status" => 'belum bayar',
-            "kode_transaksi" => Pemesanan::generateTransactionCode()
-        ]);
-
-        Pemesanan::create([
-            'user_id' => 1,
-            "venue_id" => 2,
-            "sesi_id" => 2,
-            "status" => 'belum bayar',
-            "kode_transaksi" => Pemesanan::generateTransactionCode()
-        ]);
     }
 }
