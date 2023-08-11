@@ -50,8 +50,10 @@
             </div>
 
             <div>
-                <input type="file" class="w-full max-w-xs file-input file-input-bordered file-input-primary"
-                    name="ktp" />
+                <x-input-label for="phone" :value="__('KTP')" />
+                <x-text-input id="ktp" name="ktp" type="file"
+                    class="block w-full mt-1 file-input file-input-bordered file-input-primary " :value="old('ktp', $user->ktp)"
+                    required autofocus autocomplete="ktp" />
                 <x-input-error class="mt-2" :messages="$errors->get('ktp')" />
 
             </div>
