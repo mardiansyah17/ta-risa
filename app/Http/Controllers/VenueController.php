@@ -31,7 +31,7 @@ class VenueController extends Controller
 
         $allSesi = collect();
         foreach ($prices as $price) {
-            $allSesi = $allSesi->merge($price->sesi);
+            $allSesi = $allSesi->merge($price->sesi->where('status', 'tersedia'));
         }
         $pemesanan = Pemesanan::where("venue_id", $venue->id)->get();
         return view('venue.pesanvenue', [
