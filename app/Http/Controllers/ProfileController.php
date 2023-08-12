@@ -31,6 +31,7 @@ class ProfileController extends Controller
         $user = $request->validate([
             'name' => 'required|string|max:255',
             'nik' => 'required|string|max:255',
+            'alamat' => 'required|string|max:255',
             'phone' => 'required|string|max:255',
             'ktp' => 'required|file|mimes:jpg,jpeg,png',
 

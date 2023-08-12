@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('nik')->nullable();
+            $table->string('alamat')->nullable();
             $table->string('ktp')->nullable();
             $table->boolean('is_completed')->default(false);
             $table->string('email')->unique();

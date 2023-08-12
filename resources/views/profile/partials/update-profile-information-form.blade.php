@@ -41,7 +41,12 @@
                     required autofocus autocomplete="nik" />
                 <x-input-error class="mt-2" :messages="$errors->get('nik')" />
             </div>
-
+            <div>
+                <x-input-label for="alamat" :value="__('Alamat')" />
+                <x-text-input id="alamat" name="alamat" type="text" class="block w-full mt-1" :value="old('alamat', $user->alamat)"
+                    required autofocus autocomplete="alamat" />
+                <x-input-error class="mt-2" :messages="$errors->get('alamat')" />
+            </div>
             <div>
                 <x-input-label for="phone" :value="__('Nomor hp')" />
                 <x-text-input id="phone" name="phone" type="text" class="block w-full mt-1" :value="old('phone', $user->phone)"
