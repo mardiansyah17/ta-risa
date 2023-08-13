@@ -12,19 +12,23 @@
             </div>
             <select name="venue" class="select select-primary w-full max-w-xs">
                 <option disabled selected>Pilih venue</option>
-                @foreach($venues as $venue)
-                    <option value="{{$venue->id}}">{{$venue->title}}</option>
-
+                @foreach ($venues as $venue)
+                    <option value="{{ $venue->id }}">{{ $venue->title }}</option>
                 @endforeach
             </select>
-            <button type="submit" class="btn btn-primary">Filter</button>
+            <button type="submit" class="btn btn-primary">
+                <span>Filter</span>
+                <i class="fa-solid fa-filter"></i>
+            </button>
             <a class="btn btn-primary"
-               href="{{ route('admin.download-laporan', ['start_date' => request()->query('start_date'), 'end_date' => request()->query('end_date'), 'venue' => request()->query('venue')]) }}">Download
-                Laporan</a>
+                href="{{ route('admin.download-laporan', ['start_date' => request()->query('start_date'), 'end_date' => request()->query('end_date'), 'venue' => request()->query('venue')]) }}">
+                <span> Download Laporan</span>
+                <i class="fa-solid fa-download"></i>
+            </a>
 
         </form>
         <div class="overflow-x-auto">
-            @include('components.table-laporan',["pesanans"=>$pesanans])
+            @include('components.table-laporan', ['pesanans' => $pesanans])
         </div>
     </div>
 </x-app-layout>

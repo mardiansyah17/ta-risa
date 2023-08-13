@@ -22,7 +22,8 @@
                         <td>@currency($pesanan->sesi->price->price)</td>
                         <td>{{ $pesanan->status }}</td>
                         <td>
-                            <a href="{{ route('pesanan.show', $pesanan->id) }}">Lihat</a>
+                            <a href="{{ route('pesanan.show', $pesanan->id) }}"><i
+                                    class="fa-solid fa-eye p-1 rounded-md text-white bg-green-500 "></i></a>
                         </td>
                     </tr>
                 @endforeach

@@ -1,8 +1,9 @@
+@import "@fortawesome/fontawesome-free/css/all.css";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 h2 {
-    @apply text-blue-500 font-semibold text-2xl
+    @apply text-blue-500 font-semibold text-2xl;
 }
 
 input[type="date"] {
